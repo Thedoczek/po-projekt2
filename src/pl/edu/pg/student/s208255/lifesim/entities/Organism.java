@@ -1,9 +1,9 @@
-package entities;
+package pl.edu.pg.student.s208255.lifesim.entities;
 
-import controllers.World;
-import stuctures.GlobalRandom;
-import stuctures.Position;
-import stuctures.Symbol;
+import pl.edu.pg.student.s208255.lifesim.controllers.World;
+import pl.edu.pg.student.s208255.lifesim.structures.GlobalRandom;
+import pl.edu.pg.student.s208255.lifesim.structures.Position;
+import pl.edu.pg.student.s208255.lifesim.structures.Symbol;
 
 import java.util.ArrayList;
 
@@ -15,14 +15,14 @@ public abstract class Organism {
 	protected int age = 0;
 	protected boolean alive = true;
 
-	Organism(final World world, final Position position, final int strength, final int initiative) {
+	public Organism(final World world, final Position position, final int strength, final int initiative) {
 		this.world = world;
 		this.position = position;
 		this.strength = strength;
 		this.initiative = initiative;
 	}
 
-	public abstract Organism spawn(Position pos);
+	public abstract Organism spawn(Position position);
 	public abstract void action();
 	public abstract DefendResult defend(final Organism attacker);
 	public abstract Symbol getSymbol();
@@ -66,6 +66,11 @@ public abstract class Organism {
 		return newPosition;
 	}
 
+	/**
+	 * Randomly chooses an unoccupied position in a certain radius from the organism.
+	 * @param radius How far to look for the empty position
+	 * @return Current position if there are no empty spaces in the range, target position otherwise
+	 */
 	protected final Position pickEmptyNeighbor(final int radius) {
 		final int minX = Math.max(0, position.getX() - radius);
 		final int maxX = Math.min(world.getSizeX() - 1, position.getX() + radius);

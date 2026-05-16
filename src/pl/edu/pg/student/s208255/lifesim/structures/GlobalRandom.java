@@ -1,4 +1,4 @@
-package stuctures;
+package pl.edu.pg.student.s208255.lifesim.structures;
 
 import java.util.Random;
 
